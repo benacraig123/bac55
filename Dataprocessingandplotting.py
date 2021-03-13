@@ -84,3 +84,5 @@ def bend(kt, r0):
 
 print ("Symmetric stretch:  " + str(sym_stretch(kr)) + " cm−1")
 print ("Bend:  " + str(bend(kt, r0)) + " cm−1")
+
+

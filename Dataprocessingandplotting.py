@@ -43,20 +43,20 @@ for filename in os.listdir(dir):
                 E.append(float(l[4]))
     f.close()
 
-## curvefitting
+## curvefitting data
 X = (r, theta)
 popt, pcov = curve_fit(fit, X, E)
-for i in range(len(r)):
+for i in range(len(r)):                                                 ##extract data that is close to the minimum energy only
     if r[i] > popt[2]-0.15 and r[i] < popt[2]+0.15:
         if theta[i] > popt[4]-15 and theta[i] < popt[4]+15:
             rp.append(r[i])
             thetap.append(theta[i])
             Ep.append(E[i])
 
-X = (rp, thetap)
+X = (rp, thetap)                                                        ##find new parameters using the extracted data only
 popt, pcov = curve_fit(fit, X, Ep)
 
-## Find paramaters and plot the data
+## plot the data
 fig = plt.figure()
 ax = plt.axes(projection='3d')
 ax.set_xlim([popt[2]-0.5, popt[2]+0.5])
@@ -70,7 +70,6 @@ ax.set_zlabel("Energy/Hartrees")
 ax.set_title("Energy surface")
 plt.show()
 
-#print(popt)
 ##Find and print vibrational modes
 ##unit conversions
 kr = popt[1]*4.35974*10**2
@@ -85,12 +84,3 @@ def bend(kt, r0):
 
 print ("Symmetric stretch:  " + str(sym_stretch(kr)) + " cm−1")
 print ("Bend:  " + str(bend(kt, r0)) + " cm−1")
-
-
-
-
-
-
-
-
-
